@@ -3,190 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anime Wallpapers</title>
+<title>تطبيق خلفيات أونلاين</title>
 
 <style>
-:root{
-  --main:#ff4757;
-  --dark:#0b0b0b;
-  --card:#1a1a1a;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: system-ui;
 }
-
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-
 body{
-  background:var(--dark);
-  color:#fff;
-  overflow-x:hidden;
+    background:#0f0f14;
+    color:#fff;
+    overflow-x:hidden;
 }
 
-/* ===== Splash ===== */
+/* Splash */
 #splash{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(135deg,#000,#111);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  z-index:1000;
-  animation:hideSplash 1s ease forwards;
-  animation-delay:3.5s;
+    position:fixed;
+    inset:0;
+    background:linear-gradient(135deg,#1e1e2f,#090914);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    z-index:1000;
+    animation:fadeOut 1s ease forwards;
+    animation-delay:4s;
 }
-
 #splash h1{
-  font-size:28px;
-  animation:glow 2s infinite;
+    font-size:28px;
+    animation:pulse 1.5s infinite;
 }
 #splash p{
-  margin-top:10px;
-  opacity:.7;
-  animation:float 2s infinite;
+    margin-top:10px;
+    opacity:.7;
 }
 
-@keyframes hideSplash{
-  to{opacity:0;visibility:hidden}
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
 }
-@keyframes glow{
-  0%{text-shadow:0 0 5px var(--main)}
-  50%{text-shadow:0 0 20px var(--main)}
-  100%{text-shadow:0 0 5px var(--main)}
-}
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
+@keyframes fadeOut{
+    to{opacity:0;visibility:hidden;}
 }
 
-/* ===== Header ===== */
+/* Header */
 header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:15px;
-  background:#111;
+    display:flex;
+    align-items:center;
+    padding:15px;
 }
-
-header h2{
-  animation:slideDown .8s ease;
-}
-
 .menu-btn{
-  font-size:22px;
-  cursor:pointer;
+    font-size:24px;
+    cursor:pointer;
+}
+header h2{
+    margin:auto;
 }
 
-@keyframes slideDown{
-  from{transform:translateY(-30px);opacity:0}
-  to{transform:translateY(0);opacity:1}
-}
-
-/* ===== Categories ===== */
-.categories{
-  display:flex;
-  gap:10px;
-  padding:12px;
-  overflow-x:auto;
-}
-
-.categories button{
-  background:var(--card);
-  color:#fff;
-  border:none;
-  padding:10px 18px;
-  border-radius:25px;
-  cursor:pointer;
-  transition:.3s;
-  animation:pulseBtn 3s infinite;
-}
-
-@keyframes pulseBtn{
-  0%{box-shadow:0 0 0 var(--main)}
-  50%{box-shadow:0 0 10px var(--main)}
-  100%{box-shadow:0 0 0 var(--main)}
-}
-
-/* ===== Grid ===== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  padding:12px;
-}
-
-.card{
-  height:180px;
-  background:linear-gradient(135deg,#222,#333);
-  border-radius:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  opacity:0;
-  transform:scale(.9);
-  animation:cardIn .6s ease forwards;
-}
-
-@keyframes cardIn{
-  to{opacity:1;transform:scale(1)}
-}
-
-/* ===== Drawer ===== */
+/* Drawer */
 #drawer{
-  position:fixed;
-  top:0;
-  right:-260px;
-  width:260px;
-  height:100%;
-  background:#111;
-  padding:20px;
-  z-index:999;
-  transition:.4s;
+    position:fixed;
+    top:0;
+    right:-260px;
+    width:260px;
+    height:100%;
+    background:#161622;
+    padding:20px;
+    transition:.4s;
+    z-index:999;
 }
-
-#drawer.active{right:0}
-
+#drawer.active{
+    right:0;
+}
 #drawer h3{
-  margin-bottom:10px;
+    margin-bottom:10px;
 }
-
+#drawer p{
+    font-size:14px;
+    opacity:.8;
+}
 #drawer a{
-  color:var(--main);
-  text-decoration:none;
+    display:block;
+    margin-top:15px;
+    background:#25d366;
+    color:#000;
+    padding:10px;
+    border-radius:8px;
+    text-align:center;
+    text-decoration:none;
+    font-weight:bold;
 }
 
 /* Overlay */
 #overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  display:none;
-  z-index:998;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    display:none;
+    z-index:998;
+}
+#overlay.active{
+    display:block;
 }
 
-/* ===== Viewer ===== */
-.viewer{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.9);
-  display:none;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  animation:zoom .4s ease;
+/* Content */
+main{
+    padding:20px;
+}
+.welcome{
+    text-align:center;
+    margin-top:40px;
+    animation:slideUp 1s ease;
+}
+@keyframes slideUp{
+    from{transform:translateY(30px);opacity:0;}
+    to{transform:translateY(0);opacity:1;}
 }
 
-@keyframes zoom{
-  from{transform:scale(.8);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-
-.viewer a{
-  margin-top:15px;
-  background:var(--main);
-  padding:12px 30px;
-  border-radius:30px;
-  color:#fff;
-  text-decoration:none;
+.placeholder{
+    margin-top:30px;
+    padding:20px;
+    border:2px dashed #444;
+    border-radius:12px;
+    text-align:center;
+    opacity:.6;
 }
 </style>
 </head>
@@ -195,65 +138,46 @@ header h2{
 
 <!-- Splash -->
 <div id="splash">
-  <h1>Anime Wallpapers</h1>
-  <p>عِش عالم الأنمي… صورة تُشبه روحك</p>
+    <h1>خلفيات أونلاين</h1>
+    <p>تصميم أنيق • تجربة سلسة</p>
 </div>
 
 <!-- Drawer -->
 <div id="drawer">
-  <h3>معلومات المطور</h3>
-  <p>Developer:</p>
-  <strong>Khamees Murad Jrawan</strong>
-  <br><br>
-  <a href="https://wa.me/967784070972" target="_blank">
-    تواصل واتساب مباشر
-  </a>
+    <h3>عن المطور</h3>
+    <p>تم تطوير هذا التطبيق بعناية لتقديم تجربة حديثة وسلسة.</p>
+    <p><strong>الاسم:</strong> خميس مراد</p>
+    <a href="https://wa.me/967000000000" target="_blank">تواصل واتساب</a>
 </div>
 
 <div id="overlay" onclick="closeDrawer()"></div>
 
 <header>
-  <span class="menu-btn" onclick="openDrawer()">☰</span>
-  <h2>خلفيات أنمي</h2>
+    <div class="menu-btn" onclick="openDrawer()">☰</div>
+    <h2>الرئيسية</h2>
 </header>
 
-<div class="categories">
-  <button onclick="loadCat('هجوم العمالقة')">هجوم العمالقة</button>
-  <button onclick="loadCat('قاتل الشياطين')">قاتل الشياطين</button>
-  <button onclick="loadCat('ون بيس')">ون بيس</button>
-  <button onclick="loadCat('ناروتو')">ناروتو</button>
-  <button onclick="loadCat('سولو ليفلينج')">سولو ليفلينج</button>
-</div>
+<main>
+    <div class="welcome">
+        <h1>مرحبًا بك 👋</h1>
+        <p>سيتم إضافة الخلفيات هنا لاحقًا من لوحة الأدمن</p>
+    </div>
 
-<div id="grid" class="grid"></div>
+    <div class="placeholder">
+        📸 لا توجد صور حاليًا<br>
+        سيتم جلبها تلقائيًا عند إضافتها
+    </div>
+</main>
 
 <script>
-const grid=document.getElementById("grid");
-const drawer=document.getElementById("drawer");
-const overlay=document.getElementById("overlay");
-
-function loadCat(name){
-  grid.innerHTML="";
-  for(let i=1;i<=6;i++){
-    const c=document.createElement("div");
-    c.className="card";
-    c.style.animationDelay=`${i*0.05}s`;
-    c.innerText=name+"\n(قريبًا)";
-    grid.appendChild(c);
-  }
-}
-
 function openDrawer(){
-  drawer.classList.add("active");
-  overlay.style.display="block";
+    document.getElementById("drawer").classList.add("active");
+    document.getElementById("overlay").classList.add("active");
 }
-
 function closeDrawer(){
-  drawer.classList.remove("active");
-  overlay.style.display="none";
+    document.getElementById("drawer").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
 }
-
-loadCat("هجوم العمالقة");
 </script>
 
 </body>
